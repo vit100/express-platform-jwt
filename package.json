@@ -1,0 +1,28 @@
+{
+  "name": "express-platform-jwt",
+  "version": "0.0.1",
+  "description": "Express middleware to validate bearer token. ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "publish": "git push origin"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://fusionfabric.visualstudio.com/FFDC/_git/express-platform-jwt"
+  },
+  "keywords": [
+    "express",
+    "jwt",
+    "token",
+    "middleware"
+  ],
+  "author": {
+    "email": "vitaliy.markitanov@finastra.com",
+    "name": "Vitaliy Markitanov"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "jsonwebtoken": "^8.4.0"
+  }
+}
