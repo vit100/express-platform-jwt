@@ -1,3 +1,7 @@
-validator = require('./lib');
+const expressJWTValidatorMiddleware = require('./lib/expressJWTValidatorMiddleware');
+const expessJWTStrategy = require('./lib/expressJWTStrategy');
 
-module.exports = validator;
+module.exports = {
+  expressJWTValidatorMiddleware,
+  expessJWTStrategy
+}
