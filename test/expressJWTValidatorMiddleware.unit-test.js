@@ -20,9 +20,10 @@ describe('expressMiddleware', () => {
   });
 
   describe('happy path', () => {
-    it('should call next without params if authorization header has valid bearer', async () => {
+    it('should call next() without params if authorization header has valid bearer', async () => {
       const validRequest = getExpressRequest(valid);
-      const middleware = expressJWTValidatorMiddleware();
+      const options = { jwksUri: 'https://api-qa.int.fusionfabric.cloud/login/v1/sandbox/oidc/jwks.json' };
+      const middleware = expressJWTValidatorMiddleware(options);
       const next = sinon.fake();
       sinon.spy(express.response, 'setHeader');
       express.response.send = sinon.fake();
@@ -33,14 +34,15 @@ describe('expressMiddleware', () => {
         throw error; // rethrow if uncaught error
       }
 
-      express.response.setHeader.called.should.be.equal(true);
-      express.response.statusCode.should.be.equal(401);
+      express.response.setHeader.called.should.be.equal(false); // should not touch headers
+      express.response.statusCode.should.be.equal(200);
       express.response.setHeader.restore();
     });
 
-    it.skip('should set res.user object when bearer token valid', async () => {
+    it('should set res.securityContext object when bearer token valid', async () => {
       const validRequest = getExpressRequest(valid);
-      const middleware = expressJWTValidatorMiddleware();
+      const options = { jwksUri: 'https://api-qa.int.fusionfabric.cloud/login/v1/sandbox/oidc/jwks.json' };
+      const middleware = expressJWTValidatorMiddleware(options);
       const next = sinon.fake();
 
       try {
@@ -49,7 +51,7 @@ describe('expressMiddleware', () => {
         throw error; // rethrow if uncaught error
       }
 
-      validRequest.should.have.property('user');
+      validRequest.should.have.property('securityContext');
     });
   });
 
@@ -75,14 +77,15 @@ describe('expressMiddleware', () => {
     });
 
     it('should block request if bearer token invalid', async () => {
-      const validRequest = getExpressRequest(valid);
-      const middleware = expressJWTValidatorMiddleware();
+      const req = getExpressRequest(invalid);
+      const options = { jwksUri: 'https://api-qa.int.fusionfabric.cloud/login/v1/sandbox/oidc/jwks.json' };
+      const middleware = expressJWTValidatorMiddleware(options);
       const next = sinon.fake();
       sinon.spy(express.response, 'setHeader');
       express.response.send = sinon.fake();
 
       try {
-        await middleware(validRequest, express.response, next);
+        await middleware(req, express.response, next);
       } catch (error) {
         throw error; // rethrow if uncaught error
       }
