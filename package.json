@@ -1,6 +1,6 @@
 {
-  "name": "@finastra/express-platform-jwt",
-  "version": "0.0.1",
+  "name": "express-platform-jwt",
+  "version": "0.0.3",
   "description": "Meta package with utils to validate bearer token. Includes: express based middleware, passport strategy ",
   "main": "index.js",
   "scripts": {
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://fusionfabric.visualstudio.com/FFDC/_git/express-platform-jwt"
+    "url": "https://github.com/vit100/express-platform-jwt.git"
   },
   "keywords": [
     "express",
@@ -19,7 +19,6 @@
     "middleware"
   ],
   "author": {
-    "email": "vitaliy.markitanov@finastra.com",
     "name": "Vitaliy Markitanov"
   },
   "license": "ISC",
